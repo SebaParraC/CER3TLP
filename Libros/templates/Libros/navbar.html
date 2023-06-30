@@ -1,0 +1,28 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="nav navbar-nav">
+            <a class="nav-link" href="{% url 'index' %}">Catálogo</a>
+            <a class="nav-item nav-link" href="{% url 'admin:index' %}" aria-current="page">Iniciar Sesión</a>
+            <a class="nav-link" href="/api/libros">API</a>
+        </div>
+    </nav>
+    <div class="container">
+        {%block content%}
+        {%endblock%}
+    </div>
+
+    <!-- <div class="row fixed-bottom">
+    </div> -->
+
+                <footer class="bg-light text-center text-lg-start">
+                    <div class="text-center">
+                        <h5>Taller de lenguaje de programación </h5>
+                        <h5>Paralelo 300</h5>
+                    </div>
+                </footer>
+</body>

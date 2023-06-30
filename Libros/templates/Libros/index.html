@@ -1,0 +1,64 @@
+{% extends 'Libros/navbar.html'%}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Libros</title>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <b><h1 style="text-align: center;">LA LIBRERIA</h1></b>
+        {%if oferta == True %}
+        <h2>Ofertas</h2>
+        {%endif%}
+        <div class="row">
+            {% for libro in libros %}
+            {% if libro.descuento != 0 %}
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;margin-bottom: 40px;">
+                    {% if libro.imagen != ''%}
+                        <img src="{{libro.imagen}}" class="card-img-top" alt="..." style="width: 286px; height: 400px;">
+                    {%else%}
+                        <img src="{% static 'Libros/img/nodisp.png'%}" class="card-img-top" alt="..." style="width: 286px; height: 400px;">
+                    {%endif%}
+                    <div class="card-body">
+                        <h5 class="card-title">{{libro.titulo}}</h5>
+                        <p class="card-text">${{libro.descuentoCalculado|floatformat:0}} <del style="color: grey;">${{libro.precio}}</del></p>
+                        <a href="{% url 'detalleLibro' libro.pk %}" class="btn btn-primary">Detalle</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <h2>Libros Disponibles</h2>
+        <div class="row">
+            {% for libro in libros %}
+            {% if libro.descuento == 0 %}
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;margin-bottom: 30px;">
+                    {% if libro.imagen != ''%}
+                        <img src="{{libro.imagen}}" class="card-img-top" alt="..." style="width: 286px; height: 400px;">
+                    {%else%}
+                        <img src="{% static 'Libros/img/nodisp.png'%}" class="card-img-top" alt="..." style="width: 286px; height: 400px;">
+                    {%endif%}
+                    <div class="card-body">
+                        <h5 class="card-title">{{libro.titulo}}</h5>
+                        <p class="card-text">${{libro.precio}}</p>
+                        <a href="{% url 'detalleLibro' libro.pk %}" class="btn btn-primary">Detalle</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+{%endblock%}
+</html>
